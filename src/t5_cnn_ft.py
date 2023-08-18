@@ -1,7 +1,6 @@
 import os
 from tqdm.auto import tqdm
 from datasets import load_dataset
-import transformers, datasets
 from transformers import get_linear_schedule_with_warmup
 from transformers import T5Tokenizer, T5ForConditionalGeneration, DataCollatorForSeq2Seq
 import torch
@@ -17,7 +16,7 @@ nltk.download('punkt')
 
 def train(args, accelerator):
     # tokenizer, model
-    tokenizer = T5Tokenizer.from_pretrained(args.model_name_or_path)
+    tokenizer = T5Tokenizer.from_pretrained(args.model_name_or_path, legacy=False)
     model = T5ForConditionalGeneration.from_pretrained(args.model_name_or_path)
 
     # We resize the embeddings only when necessary to avoid index errors. If you are creating a model from scratch
